@@ -10,7 +10,7 @@
 #include <EMUcanT4.h>
 
 //Define the EMU Can Base at 600):
-EMUcan emucan(600);
+EMUcan emucan(0x600);
 
 unsigned long previousMillis = 0;
 const long interval = 1000;
@@ -20,6 +20,10 @@ void setup() {
 
   //Call this in the setup to init the lib:
   emucan.begin(500000);
+  
+  //Setup the Callback to receive every CAN Message:
+  ReturnAllFramesFunction LetMeHaveIt = specialframefunction;
+  emucan.ReturnAllFrames(LetMeHaveIt);
 
   Serial.println("------- CAN Read ----------");
 
@@ -42,6 +46,25 @@ void loop() {
     } else {
       Serial.println("No communication from EMU");
     }
-
+    //Stop sending all frames after 1 second, this spams the serial
+    emucan.ReturnAllFramesStop();
   }
+}
+
+// self defined function to handle all frames:
+void specialframefunction(const CAN_message_t *frame) {
+  //Magic things can happen here, but dont block!
+  Serial.print(frame->id, HEX); // print ID
+  Serial.print(" ");
+  Serial.print(frame->len, HEX); // print DLC
+  Serial.print(" ");
+
+  for (int i = 0; i < frame->len; i++)  { // print the data
+    Serial.print(frame->buf[i], HEX);
+    Serial.print(" ");
+  }
+  Serial.println();
+
+  //Toggle the onboard LED for show:
+  digitalWrite(LED_BUILTIN, !digitalRead(LED_BUILTIN));
 }
