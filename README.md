@@ -1,4 +1,4 @@
-# EMUcan
+# EMUcanT4
 ECUMaster EMU CAN Stream Reader Arduino Teensy 4 Library
 
 It reads the EMU CAN Stream and decodes it into something usefull.
@@ -23,6 +23,10 @@ The EMU Black is running Software Version 2.127.
 
 Uses this CAN Library: (installed with the Teensyduino add-on)
 https://github.com/tonton81/FlexCAN_T4
+
+## Other Versions
+
+For Arduino Nano use the EMUcan: https://github.com/designer2k2/EMUcan
 
 ## Support
 
