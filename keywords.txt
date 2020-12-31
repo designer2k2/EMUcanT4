@@ -1,0 +1,18 @@
+# -----------------------------------------
+# Syntax colouring for EMUcan library
+# -----------------------------------------
+
+# Datatypes (such as objects)
+EMUcan	KEYWORD1
+
+#Methods / functions
+begin 		KEYWORD2
+checkEMUcan	KEYWORD2
+sendFrame 	KEYWORD2
+decodeCel 	KEYWORD2
+
+# Constants
+emu_data 	LITERAL1
+EMUcan_FRESH 	LITERAL1
+EMUcan_RECEIVED_WITHIN_LAST_SECOND	LITERAL1
+EMUcan_RECEIVED_NOTHING_WITHIN_LAST_SECOND	LITERAL1
