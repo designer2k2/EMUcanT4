@@ -80,6 +80,15 @@ bool EMUcan::sendFrame(const CAN_message_t sendframe) {
 
 bool EMUcan::decodeEmuFrame(struct CAN_message_t *msg) {
   //This decodes the frames and fills them into the data:
+
+  //first, check if overrun happened:
+  if (msg->flags.overrun) {
+    //oh oh!
+    over_run = true;
+  } else {
+    over_run = false;
+  }
+
   //Base:
   if (msg->id == _EMUbase) {
     //0-1 RPM in 16Bit unsigned

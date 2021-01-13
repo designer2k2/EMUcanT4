@@ -79,6 +79,7 @@ enum EMUcan_STATUS {
   EMUcan_FRESH,
   EMUcan_RECEIVED_WITHIN_LAST_SECOND,
   EMUcan_RECEIVED_NOTHING_WITHIN_LAST_SECOND,
+  EMUcan_CANBUSERROR
 };
 
 typedef void (*ReturnAllFramesFunction) (const CAN_message_t *);
@@ -93,8 +94,12 @@ class EMUcan {
     void begin(const uint32_t canSpeed);
     bool checkEMUcan();
     bool sendFrame(const CAN_message_t sendframe);
+    bool decodeCel();
+    void ReturnAllFrames (ReturnAllFramesFunction response);
+    void ReturnAllFramesStop();
 
     // Data
+    enum EMUcan_STATUS EMUcan_Status = EMUcan_FRESH;
     struct emu_data_t emu_data;
 
     enum ERRORFLAG : uint16_t {
@@ -174,26 +179,24 @@ class EMUcan {
       F_BOOST_MAP_SET = (1 << 6),
     };
 
-    bool decodeCel();
-    enum EMUcan_STATUS EMUcan_Status = EMUcan_FRESH;
-
-    void ReturnAllFrames (ReturnAllFramesFunction response);
-    void ReturnAllFramesStop();
+    bool over_run = false;
 
     // Privates
   private:
-
-    bool _returnexists = false;
-    ReturnAllFramesFunction _returnfunction;
 
     enum EMU_STATUS_UPDATES {
       EMU_MESSAGE_RECEIVED_VALID,
       EMU_RECEIVED_NOTHING
     };
+
     bool decodeEmuFrame(struct CAN_message_t *msg);
     void emucanstatusEngine(const EMU_STATUS_UPDATES action);
+
+    bool _returnexists = false;
+    ReturnAllFramesFunction _returnfunction;
     uint32_t _EMUbase;
     unsigned long _previousMillis = 0;
+
 
 };
 #endif
