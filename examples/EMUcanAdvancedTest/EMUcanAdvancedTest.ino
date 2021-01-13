@@ -20,7 +20,9 @@ void setup() {
 
   //Call this in the setup to init the lib:
   emucan.begin(500000);
-  
+  //Check mailbox status:
+  emucan.mailboxStatus();
+
   //Setup the Callback to receive every CAN Message:
   ReturnAllFramesFunction LetMeHaveIt = specialframefunction;
   emucan.ReturnAllFrames(LetMeHaveIt);
@@ -45,6 +47,9 @@ void loop() {
       }
     } else {
       Serial.println("No communication from EMU");
+    }
+    if (emucan.over_run) {
+      Serial.println("Overrun! Loosing Data!");
     }
     //Stop sending all frames after 1 second, this spams the serial
     emucan.ReturnAllFramesStop();
