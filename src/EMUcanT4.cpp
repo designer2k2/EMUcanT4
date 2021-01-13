@@ -33,6 +33,9 @@ EMUcan::EMUcan(const uint32_t EMUbase) {
 void EMUcan::begin(const uint32_t canSpeed) {
   can1.begin();
   can1.setBaudRate(canSpeed);
+  can1.setMaxMB(64);
+  can1.enableFIFO();
+  can1.mailboxStatus();
 }
 
 bool EMUcan::checkEMUcan() {
@@ -78,7 +81,7 @@ bool EMUcan::sendFrame(const CAN_message_t sendframe) {
   return true;
 }
 
-bool EMUcan::decodeEmuFrame(struct CAN_message_t *msg) {
+void EMUcan::decodeEmuFrame(struct CAN_message_t *msg) {
   //This decodes the frames and fills them into the data:
 
   //first, check if overrun happened:
@@ -172,7 +175,6 @@ bool EMUcan::decodeEmuFrame(struct CAN_message_t *msg) {
     //PWM#1 DC 1%/bit
     emu_data.pwm1 = msg->buf[2];
   }
-  return true;
 }
 
 bool EMUcan::decodeCel() {
@@ -191,4 +193,8 @@ void EMUcan::ReturnAllFrames (ReturnAllFramesFunction response) {
 
 void EMUcan::ReturnAllFramesStop() {
   _returnexists = false;
+}
+
+void EMUcan::mailboxStatus() {
+  can1.mailboxStatus();
 }

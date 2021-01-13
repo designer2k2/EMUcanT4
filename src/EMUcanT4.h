@@ -97,6 +97,7 @@ class EMUcan {
     bool decodeCel();
     void ReturnAllFrames (ReturnAllFramesFunction response);
     void ReturnAllFramesStop();
+    void mailboxStatus();
 
     // Data
     enum EMUcan_STATUS EMUcan_Status = EMUcan_FRESH;
@@ -189,7 +190,7 @@ class EMUcan {
       EMU_RECEIVED_NOTHING
     };
 
-    bool decodeEmuFrame(struct CAN_message_t *msg);
+    void decodeEmuFrame(struct CAN_message_t *msg);
     void emucanstatusEngine(const EMU_STATUS_UPDATES action);
 
     bool _returnexists = false;

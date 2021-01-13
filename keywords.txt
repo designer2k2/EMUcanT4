@@ -12,6 +12,7 @@ sendFrame	KEYWORD2
 decodeCel	KEYWORD2
 ReturnAllFrames	KEYWORD2
 ReturnAllFramesStop	KEYWORD2
+mailboxStatus	KEYWORD2
 
 # Constants
 emu_data	LITERAL1
