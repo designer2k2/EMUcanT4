@@ -105,7 +105,7 @@ Serial.println(emucan.emu_data.RPM);
 
 All the values:
 
-see https://github.com/designer2k2/EMUcan/blob/main/src/EMUcan.h
+see https://github.com/designer2k2/EMUcanT4/blob/main/src/EMUcanT4.h
 
 ```C++
 // Available data
@@ -172,7 +172,7 @@ if (emucan.emu_data.flags1 & emucan.F_IDLE) {
 
 This can be used to transmit data to the EMU Black, or any other Device on the CAN Bus.
 
-Example: https://github.com/designer2k2/EMUcan/blob/main/examples/EMUcanSendTest/EMUcanSendTest.ino
+Example: https://github.com/designer2k2/EMUcanT4/blob/main/examples/EMUcanSendTest/EMUcanSendTest.ino
 
 Define a CAN Message:
 ```C++
@@ -193,14 +193,14 @@ emucan.sendFrame(&canMsg1);
 ```
 
 In the EMU Black Software use this to define the receive:
-https://github.com/designer2k2/EMUcan/blob/main/examples/EMUcanSendTest/EMUBlackCANStreamExample.canstr
+https://github.com/designer2k2/EMUcanT4/blob/main/examples/EMUcanSendTest/EMUBlackCANStreamExample.canstr
 
 
 ## Custom Frame Receive
 
 Listening to more than just the EMU Black CAN Stream is possible. Every CAN frame can be used.
 
-The advanced example shows it: https://github.com/designer2k2/EMUcan/blob/main/examples/EMUcanAdvancedTest/EMUcanAdvancedTest.ino
+The advanced example shows it: https://github.com/designer2k2/EMUcanT4/blob/main/examples/EMUcanAdvancedTest/EMUcanAdvancedTest.ino
 
 in Setup:
 ```C++
