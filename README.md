@@ -40,7 +40,7 @@ The EMU Black is running Software Version 2.127.
 
 ## Other Versions
 
-For Arduino Nano use the EMUcan: https://github.com/designer2k2/EMUcan
+For Arduino (Nano) with MCP2515 use the EMUcan: https://github.com/designer2k2/EMUcan
 
 ## Support
 
