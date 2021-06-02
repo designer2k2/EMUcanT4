@@ -51,9 +51,6 @@ The EMU Stream base ID can be changed, the begin function takes this as paramete
 
 CAN-Bus speed can be set too, look in the examples.
 
-This Library is tested on Teensy 4.0 with
-
-
 ## Hardware
 
 The Teensy 4.0 has a CAN Bus inside, CAN1 on pin 22 and 23 is used. 
@@ -295,6 +292,8 @@ emucan.mailboxStatus();
 This Library is tested with a Teesy 4.0 and SN65HVD232 transceiver.
 
 The EMU Black was running Software Version 2.127.
+
+Arduino IDE Version 1.8.13 and Teensyduino 1.53 was used.
 
 ## Different Versions
 
