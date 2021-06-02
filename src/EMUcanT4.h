@@ -18,6 +18,11 @@
 #ifndef _EMUcanT4_h
 #define _EMUcanT4_h
 
+#if (defined(__IMXRT1062__) && defined(ARDUINO_TEENSY40)) || (defined(__IMXRT1062__) && defined(ARDUINO_TEENSY41))
+#else
+#error The EMUcanT4 Version only works on Teensy 4! Please use the generic EMUcan Library Version instead.
+#endif
+
 #if defined(ARDUINO) && ARDUINO >= 100
 #include "Arduino.h"
 #else
