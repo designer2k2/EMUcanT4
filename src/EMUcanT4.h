@@ -103,7 +103,10 @@ class EMUcan {
     void ReturnAllFrames (ReturnAllFramesFunction response);
     void ReturnAllFramesStop();
     void mailboxStatus();
-
+    void setClock(FLEXCAN_CLOCK clock);
+    uint32_t CanErrorReport(void);
+    uint8_t CanErrorCounter(bool RXorTX);
+	
     // Data
     enum EMUcan_STATUS EMUcan_Status = EMUcan_FRESH;
     struct emu_data_t emu_data;

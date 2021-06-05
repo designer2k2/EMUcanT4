@@ -198,3 +198,23 @@ void EMUcan::ReturnAllFramesStop() {
 void EMUcan::mailboxStatus() {
   can1.mailboxStatus();
 }
+
+void EMUcan::setClock(FLEXCAN_CLOCK clock) {
+  can1.setClock(clock);
+}
+
+#define FLEXCAN0_BASE      (0x40024000L)  // Needed to resolve FLEXCAN0_ECR & FLEXCAN0_ESR1
+uint8_t EMUcan::CanErrorCounter(bool RXorTX)
+{
+  if (RXorTX == false) {
+    return (FLEXCAN0_ECR >> 8); //shift 8 for RX
+  }
+  else {
+    return (FLEXCAN0_ECR);
+  }
+}
+
+uint32_t EMUcan::CanErrorReport(void)
+{
+  return (FLEXCAN0_ESR1);
+}
