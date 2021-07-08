@@ -31,6 +31,8 @@
 
 #include <FlexCAN_T4.h>
 
+#define EMUCANT4_LIB_VERSION               (F("1.0.3"))
+
 // Available data
 struct emu_data_t {
   uint16_t RPM;  //RPM
