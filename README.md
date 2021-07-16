@@ -20,6 +20,8 @@ It also can send data to the EMU!
    * [Reading Flags](#reading-flags)
    * [Sending Data](#sending-data)
    * [Custom Frame Receive](#custom-frame-receive)
+   * [Mailbox Status](#mailbox-status)
+   * [CAN Bus Warnings and Errors](#can-bus-warnings-and-errors)
 * [Others](#others)
    * [Different Versions](#different-versions)
    * [Support](#support)
@@ -40,8 +42,10 @@ git clone https://github.com/designer2k2/EMUcanT4.git
 
 When installed you will also see a few examples in `File` → `Examples` → `EMUcanT4` menu.
 
-This Library uses the CAN Library: (installed with the Teensyduino add-on)
+This Library uses the CAN Library: 
 https://github.com/tonton81/FlexCAN_T4
+Since Version 1.0.4 from the EMUcanT4 please install the FlexCAN_T4 from Github.
+The Version installed with the Teensyduino add-on is outdated.
 
 ## Setup
 
@@ -286,6 +290,29 @@ The Teensy 4.0 CAN offers this for debug reasons, it prints into the Serial port
 ```C++
 emucan.mailboxStatus();
 ```
+
+## CAN Bus Warnings and Errors:
+
+The Teensy 4.0 CAN offers diagnose informations for debug reasons with the Flex_CAN_T4 library.
+```C++
+    if (emucan.can_error_flag) {
+      //CAN Error gets true on any warning / error from the CAN controller
+      //The can_error_data contains detailed information.
+      Serial.println("CAN Error!");
+      Serial.print("FlexCAN State: "); Serial.print((char*)emucan.can_error_data.state);
+      if ( emucan.can_error_data.BIT1_ERR ) Serial.print(", BIT1_ERR");
+      if ( emucan.can_error_data.BIT0_ERR ) Serial.print(", BIT0_ERR");
+      if ( emucan.can_error_data.ACK_ERR ) Serial.print(", ACK_ERR");
+      if ( emucan.can_error_data.CRC_ERR ) Serial.print(", CRC_ERR");
+      if ( emucan.can_error_data.FRM_ERR ) Serial.print(", FRM_ERR");
+      if ( emucan.can_error_data.STF_ERR ) Serial.print(", STF_ERR");
+      if ( emucan.can_error_data.RX_WRN ) Serial.printf(", RX_WRN: %d", emucan.can_error_data.RX_ERR_COUNTER);
+      if ( emucan.can_error_data.TX_WRN ) Serial.printf(", TX_WRN: %d", emucan.can_error_data.TX_ERR_COUNTER);
+      Serial.printf(", FLT_CONF: %s\n", (char*)emucan.can_error_data.FLT_CONF);
+    }
+```
+
+See the EMUcanDiagnoseTest.ino example for details: https://github.com/designer2k2/EMUcanT4/blob/main/examples/EMUcanDiagnoseTest/EMUcanDiagnoseTest.ino
 
 # Others
 
