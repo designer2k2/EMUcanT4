@@ -1,0 +1,18 @@
+{
+	"name": "EMUcan",
+	"keywords": "EMU, Ecumaster, CAN, EMU Black, Arduino, Teensy",
+	"description": "Library to read and decode the ECUMaster default CAN Stream with a Teensy 4. It can also send data to the EMU.",
+	"authors": [{
+		"name": "Stephan M.",
+		"email": "designer2k2@gmail.com",
+		"maintainer": true
+	}],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/designer2k2/EMUcanT4"
+	},
+	"version": "1.0.4",
+	"license": "GPL-3.0-only",
+	"frameworks": "arduino",
+	"platforms": "teensy"
+}
