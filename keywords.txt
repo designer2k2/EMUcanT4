@@ -13,8 +13,6 @@ decodeCel	KEYWORD2
 ReturnAllFrames	KEYWORD2
 ReturnAllFramesStop	KEYWORD2
 mailboxStatus	KEYWORD2
-CanErrorReport	KEYWORD2
-CanErrorCounter	KEYWORD2
 
 # Constants
 emu_data	LITERAL1
@@ -23,3 +21,5 @@ EMUcan_RECEIVED_WITHIN_LAST_SECOND	LITERAL1
 EMUcan_RECEIVED_NOTHING_WITHIN_LAST_SECOND	LITERAL1
 ReturnAllFramesFunction	LITERAL1
 over_run	LITERAL1
+can_error_flag	LITERAL1
+can_error_data	LITERAL1
