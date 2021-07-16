@@ -53,6 +53,12 @@ bool EMUcan::checkEMUcan() {
   } else {
     emucanstatusEngine(EMU_RECEIVED_NOTHING);
   }
+  //Check the can error status:
+  if ( can1.error(can_error_data, false) ) {
+    can_error_flag = true;
+  } else {
+    can_error_flag = false;
+  }
   return true;
 }
 
@@ -197,4 +203,8 @@ void EMUcan::ReturnAllFramesStop() {
 
 void EMUcan::mailboxStatus() {
   can1.mailboxStatus();
+}
+
+void EMUcan::setClock(FLEXCAN_CLOCK clock) {
+  can1.setClock(clock);
 }

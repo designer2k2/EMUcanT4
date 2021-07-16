@@ -31,6 +31,8 @@
 
 #include <FlexCAN_T4.h>
 
+#define EMUCANT4_LIB_VERSION               (F("1.0.4"))
+
 // Available data
 struct emu_data_t {
   uint16_t RPM;  //RPM
@@ -103,6 +105,7 @@ class EMUcan {
     void ReturnAllFrames (ReturnAllFramesFunction response);
     void ReturnAllFramesStop();
     void mailboxStatus();
+    void setClock(FLEXCAN_CLOCK clock);
 
     // Data
     enum EMUcan_STATUS EMUcan_Status = EMUcan_FRESH;
@@ -186,6 +189,8 @@ class EMUcan {
     };
 
     bool over_run = false;
+    bool can_error_flag = false;
+    CAN_error_t can_error_data;   // This is part of FlexCAN_T4
 
     // Privates
   private:
