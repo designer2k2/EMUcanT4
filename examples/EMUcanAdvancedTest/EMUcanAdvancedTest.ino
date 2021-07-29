@@ -23,8 +23,8 @@ void setup() {
   //Check mailbox status:
   emucan.mailboxStatus();
 
-  Serial.print("EMUCAN_LIB_VERSION: ");
-  Serial.println(EMUCAN_LIB_VERSION);
+  Serial.print("EMUCANT4_LIB_VERSION: ");
+  Serial.println(EMUCANT4_LIB_VERSION);
 
   //Setup the Callback to receive every CAN Message:
   ReturnAllFramesFunction LetMeHaveIt = specialframefunction;
