@@ -156,7 +156,7 @@ void EMUcan::decodeEmuFrame(struct CAN_message_t *msg) {
     //1 ECUTEMP °C
     emu_data.emuTemp = msg->buf[1];
     //2-3 BATT 16bit  0.027 V/bit
-    emu_data.Batt = ((msg->buf[3] << 5) + msg->buf[2]) * 0.027;
+    emu_data.Batt = ((msg->buf[3] << 8) + msg->buf[2]) * 0.027;
     //4-5 ERRFLAG 16bit
     emu_data.cel = ((msg->buf[5] << 8) + msg->buf[4]);
     //6 FLAGS1 8bit
