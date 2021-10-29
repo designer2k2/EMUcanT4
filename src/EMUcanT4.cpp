@@ -129,8 +129,8 @@ void EMUcan::decodeEmuFrame(struct CAN_message_t *msg) {
     emu_data.oilTemperature = msg->buf[3];
     //4 OILP BAR 0.0625
     emu_data.oilPressure = msg->buf[4] * 0.0625;
-    //5 FUELP BAR 0.03125
-    emu_data.fuelPressure = msg->buf[5] * 0.03125;
+    //5 FUELP BAR 0.0625
+    emu_data.fuelPressure = msg->buf[5] * 0.0625;
     //6-7 CLT 16bit Signed 0.016129ms
     emu_data.CLT = ((msg->buf[7] << 8) + msg->buf[6]);
   }
