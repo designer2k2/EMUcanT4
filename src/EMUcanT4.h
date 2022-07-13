@@ -31,7 +31,7 @@
 
 #include <FlexCAN_T4.h>
 
-#define EMUCANT4_LIB_VERSION               (F("1.0.6"))
+#define EMUCANT4_LIB_VERSION               (F("1.0.7"))
 
 // Available data
 struct emu_data_t {

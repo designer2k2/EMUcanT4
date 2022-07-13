@@ -176,17 +176,17 @@ void EMUcan::decodeEmuFrame(struct CAN_message_t *msg) {
   }
   //Base +7:
   if (msg->id == _EMUbase + 7) {
-    //Boost target 16bit 0-600 kPa
+    //0-1 Boost target 16bit 0-600 kPa
     emu_data.boostTarget = ((msg->buf[1] << 8) + msg->buf[0]);
-    //PWM#1 DC 1%/bit
+    //2 PWM#1 DC 1%/bit
     emu_data.pwm1 = msg->buf[2];
 	//since version 143 this contains more data, check lenght:
-	if (msg->can_dlc == 7) {
-		//Lambda target 8bit 0.01%/bit 
+	if (msg->len == 7) {
+		//4 Lambda target 8bit 0.01%/bit 
 		emu_data.lambdaTarget = msg->buf[4] / 100.0;
-		//PWM#2 DC 1%/bit
+		//5 PWM#2 DC 1%/bit
 		emu_data.pwm2 = msg->buf[5];
-		//Fuel used 16bit 0.01L/bit 
+		//6-7 Fuel used 16bit 0.01L/bit 
 		emu_data.fuel_used = ((msg->buf[7] << 8) + msg->buf[6]) / 100.0; 
 	}
   }
