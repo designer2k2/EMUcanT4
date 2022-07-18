@@ -181,7 +181,7 @@ void EMUcan::decodeEmuFrame(struct CAN_message_t *msg) {
     //2 PWM#1 DC 1%/bit
     emu_data.pwm1 = msg->buf[2];
 	//since version 143 this contains more data, check lenght:
-	if (msg->len == 7) {
+	if (msg->len == 8) {
 		//4 Lambda target 8bit 0.01%/bit 
 		emu_data.lambdaTarget = msg->buf[4] / 100.0;
 		//5 PWM#2 DC 1%/bit
