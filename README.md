@@ -156,6 +156,8 @@ struct emu_data_t {
   uint8_t outflags4; //Outflags 4
   uint8_t pwm1; //%
   uint16_t boostTarget; //kPa
+  uint8_t pwm2; //%
+  float fuel_used; //L
 };
 ```
 
@@ -318,9 +320,9 @@ See the EMUcanDiagnoseTest.ino example for details: https://github.com/designer2
 
 This Library is tested with a Teesy 4.0 and SN65HVD232 transceiver.
 
-The EMU Black was running Software Version 2.127.
+The EMU Black was running Software Version 2.154.
 
-Arduino IDE Version 1.8.13 and Teensyduino 1.53 was used.
+Arduino IDE Version 1.8.19 and Teensyduino 1.56 was used.
 
 ## Different Versions
 
