@@ -156,6 +156,8 @@ struct emu_data_t {
   uint8_t outflags4; //Outflags 4
   uint8_t pwm1; //%
   uint16_t boostTarget; //kPa
+  uint8_t pwm2; //%
+  float fuel_used; //L
 };
 ```
 
