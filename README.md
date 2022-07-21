@@ -43,9 +43,7 @@ git clone https://github.com/designer2k2/EMUcanT4.git
 When installed you will also see a few examples in `File` → `Examples` → `EMUcanT4` menu.
 
 This Library uses the CAN Library: 
-https://github.com/tonton81/FlexCAN_T4
-Since Version 1.0.4 from the EMUcanT4 please install the FlexCAN_T4 from Github.
-The Version installed with the Teensyduino add-on is outdated.
+https://github.com/tonton81/FlexCAN_T4 it is automatically installed with the Teensyduino add-on.
 
 ## Setup
 
