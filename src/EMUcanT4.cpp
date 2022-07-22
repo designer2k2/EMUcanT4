@@ -103,7 +103,7 @@ void EMUcan::decodeEmuFrame(struct CAN_message_t *msg) {
     //0-1 RPM in 16Bit unsigned
     emu_data.RPM = (msg->buf[1] << 8) + msg->buf[0];
     //2 TPS in /2 %
-    emu_data.TPS = msg->buf[2] / 2;
+    emu_data.TPS = msg->buf[2] * 0.5;
     //3 IAT 8bit signed -40-127°C
     emu_data.IAT = int8_t(msg->buf[3]);
     //4-5 MAP 16Bit 0-600kpa
@@ -137,13 +137,13 @@ void EMUcan::decodeEmuFrame(struct CAN_message_t *msg) {
   //Base +3:
   if (msg->id == _EMUbase + 3) {
     //0 IGNANG in 8Bit signed    -60 60  0.5deg/bit
-    emu_data.IgnAngle = int8_t(msg->buf[0]) / 2;
+    emu_data.IgnAngle = int8_t(msg->buf[0]) * 0.5;
     //1 DWELL 0-10ms 0.05ms/bit
     emu_data.dwellTime = msg->buf[1] * 0.05;
     //2 LAMBDA 8bit 0-2 0.0078125 L/bit
     emu_data.wboLambda = msg->buf[2] * 0.0078125;
     //3 LAMBDACORR 75-125 0.5%
-    emu_data.LambdaCorrection = msg->buf[3] / 2;
+    emu_data.LambdaCorrection = msg->buf[3] * 0.5;
     //4-5 EGT1 16bit °C
     emu_data.Egt1 = ((msg->buf[5] << 8) + msg->buf[4]);
     //6-7 EGT2 16bit °C
@@ -183,11 +183,11 @@ void EMUcan::decodeEmuFrame(struct CAN_message_t *msg) {
 	//since version 143 this contains more data, check lenght:
 	if (msg->len == 8) {
 		//4 Lambda target 8bit 0.01%/bit 
-		emu_data.lambdaTarget = msg->buf[4] / 100.0;
+		emu_data.lambdaTarget = msg->buf[4] * 0.01;
 		//5 PWM#2 DC 1%/bit
 		emu_data.pwm2 = msg->buf[5];
 		//6-7 Fuel used 16bit 0.01L/bit 
-		emu_data.fuel_used = ((msg->buf[7] << 8) + msg->buf[6]) / 100.0; 
+		emu_data.fuel_used = ((msg->buf[7] << 8) + msg->buf[6]) * 0.01; 
 	}
   }
 }
