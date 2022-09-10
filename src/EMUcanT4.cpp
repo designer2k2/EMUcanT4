@@ -20,9 +20,14 @@
 
 #include "EMUcanT4.h"
 
-// CAN Things, CAN1 on pin22 pin23 is used at Teensy 4:
+// CAN Things, CAN1 on pin22 pin23 is used at Teensy 4, and CAN0 on Teensy 3:
 #include <FlexCAN_T4.h>
+#if (defined(__IMXRT1062__) && defined(ARDUINO_TEENSY40)) || (defined(__IMXRT1062__) && defined(ARDUINO_TEENSY41))
 FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16> can1;
+#else
+FlexCAN_T4<CAN0, RX_SIZE_256, TX_SIZE_16> can1;
+#endif
+
 CAN_message_t canMsg;
 
 EMUcan::EMUcan(const uint32_t EMUbase) {
@@ -33,7 +38,12 @@ EMUcan::EMUcan(const uint32_t EMUbase) {
 void EMUcan::begin(const uint32_t canSpeed) {
   can1.begin();
   can1.setBaudRate(canSpeed);
+#if (defined(__IMXRT1062__) && defined(ARDUINO_TEENSY40)) || (defined(__IMXRT1062__) && defined(ARDUINO_TEENSY41))
+  //on Teensy 4 64 works:
   can1.setMaxMB(64);
+#else
+  can1.setMaxMB(16);
+#endif
   can1.enableFIFO();
   can1.mailboxStatus();
 }
@@ -180,15 +190,15 @@ void EMUcan::decodeEmuFrame(struct CAN_message_t *msg) {
     emu_data.boostTarget = ((msg->buf[1] << 8) + msg->buf[0]);
     //2 PWM#1 DC 1%/bit
     emu_data.pwm1 = msg->buf[2];
-	//since version 143 this contains more data, check lenght:
-	if (msg->len == 8) {
-		//4 Lambda target 8bit 0.01%/bit 
-		emu_data.lambdaTarget = msg->buf[4] * 0.01;
-		//5 PWM#2 DC 1%/bit
-		emu_data.pwm2 = msg->buf[5];
-		//6-7 Fuel used 16bit 0.01L/bit 
-		emu_data.fuel_used = ((msg->buf[7] << 8) + msg->buf[6]) * 0.01; 
-	}
+    //since version 143 this contains more data, check lenght:
+    if (msg->len == 8) {
+      //4 Lambda target 8bit 0.01%/bit
+      emu_data.lambdaTarget = msg->buf[4] * 0.01;
+      //5 PWM#2 DC 1%/bit
+      emu_data.pwm2 = msg->buf[5];
+      //6-7 Fuel used 16bit 0.01L/bit
+      emu_data.fuel_used = ((msg->buf[7] << 8) + msg->buf[6]) * 0.01;
+    }
   }
 }
 
@@ -215,5 +225,8 @@ void EMUcan::mailboxStatus() {
 }
 
 void EMUcan::setClock(FLEXCAN_CLOCK clock) {
+#if (defined(__IMXRT1062__) && defined(ARDUINO_TEENSY40)) || (defined(__IMXRT1062__) && defined(ARDUINO_TEENSY41))
+  // This only works on Teensy 4
   can1.setClock(clock);
+#endif
 }

@@ -1,5 +1,5 @@
 # EMUcanT4
-ECUMaster EMU CAN Stream Reader Arduino Teensy 4 Library
+ECUMaster EMU CAN Stream Reader Arduino Teensy 4 and 3 Library
 
 It reads the EMU CAN Stream and decodes it into something usefull.
 
@@ -55,7 +55,9 @@ CAN-Bus speed can be set too, look in the examples.
 
 ## Hardware
 
-The Teensy 4.0 has a CAN Bus inside, CAN1 on pin 22 and 23 is used. 
+The Teensy 4.0 has a CAN Bus inside, CAN1 on pin 22 and 23 is used. For Teensy 3 CAN0 is used.
+
+Teensy 3.5 and 3.6 are also supported.
 
 Tested CAN Bus Transceiver can be found here: https://github.com/PaulStoffregen/FlexCAN
 
@@ -318,9 +320,11 @@ See the EMUcanDiagnoseTest.ino example for details: https://github.com/designer2
 
 This Library is tested with a Teesy 4.0 and SN65HVD232 transceiver.
 
+It also is tested on a Teensy 3.5
+
 The EMU Black was running Software Version 2.154.
 
-Arduino IDE Version 1.8.19 and Teensyduino 1.56 was used.
+Arduino IDE Version 1.8.19 and Teensyduino 1.57 was used.
 
 ## Different Versions
 
