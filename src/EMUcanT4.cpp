@@ -38,7 +38,12 @@ EMUcan::EMUcan(const uint32_t EMUbase) {
 void EMUcan::begin(const uint32_t canSpeed) {
   can1.begin();
   can1.setBaudRate(canSpeed);
+#if (defined(__IMXRT1062__) && defined(ARDUINO_TEENSY40)) || (defined(__IMXRT1062__) && defined(ARDUINO_TEENSY41))
+  //on Teensy 4 64 works:
   can1.setMaxMB(64);
+#else
+  can1.setMaxMB(16);
+#endif
   can1.enableFIFO();
   can1.mailboxStatus();
 }
