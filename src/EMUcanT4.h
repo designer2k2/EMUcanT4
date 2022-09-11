@@ -74,6 +74,13 @@ struct emu_data_t {
   uint16_t boostTarget; //kPa
   uint8_t pwm2; //%
   float fuel_used; //L
+  uint8_t DSGmode; //DSG mode
+  float DBWpos; //%
+  float DBWtarget; //%
+  uint16_t TCdrpmRaw; //
+  uint16_t TCdrpm; //
+  uint8_t TCtorqueReduction; //%
+  uint8_t PitLimitTorqueReduction; //%
 };
 
 enum EMUcan_STATUS {
