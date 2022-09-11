@@ -121,7 +121,6 @@ struct emu_data_t {
   uint16_t Egt1;  //C
   uint16_t Egt2;  //C
   float dwellTime;  //ms
-  float wboAFR;  //AFR
   int8_t gear;  //
   uint8_t Baro;  //kPa
   float analogIn1;  //V
