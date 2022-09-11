@@ -42,10 +42,8 @@ struct emu_data_t {
   float Batt;  //V
   float IgnAngle;  //deg
   float pulseWidth;  //ms
-  float scondarypulseWidth;  //ms
   uint16_t Egt1;  //C
   uint16_t Egt2;  //C
-  float knockLevel;  //V
   float dwellTime;  //ms
   float wboAFR;  //AFR
   int8_t gear;  //
@@ -56,21 +54,15 @@ struct emu_data_t {
   float analogIn4;  //V
   float analogIn5;  //V
   float analogIn6;  //V
-  float injDC;  //%
   int8_t emuTemp;  //C
   float oilPressure;  //Bar
   uint8_t oilTemperature;  //C
   float fuelPressure;  //Bar
   int16_t CLT;  //C
   float flexFuelEthanolContent;  //%
-  int8_t ffTemp;  //C
   float wboLambda;  //λ
   uint16_t vssSpeed;  //km/h
-  uint16_t deltaFPR;  //kPa
-  uint8_t fuelLevel;  //%
-  uint8_t tablesSet;  //
   float lambdaTarget;  //λ
-  float afrTarget;  //AFR
   uint16_t cel;  //
   float LambdaCorrection; //%
   uint8_t flags1; //Flags 1
