@@ -1,0 +1,19 @@
+name: Compile Examples
+
+on:
+  - push
+  - pull_request
+
+jobs:
+  compile-sketch:
+    runs-on: ubuntu-latest
+
+    steps:
+        - uses: actions/checkout@v2
+        - uses: arduino/compile-sketches@v1
+          with:
+            platforms: |
+              - source-url: https://www.pjrc.com/teensy/package_teensy_index.json
+              name: "teensy:avr:teensy40" 
+            libraries: |
+              - source-path: ./
