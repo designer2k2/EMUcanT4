@@ -1,4 +1,3 @@
- 76 lines (68 sloc) 3.25 KB
 # This is a basic workflow to check build of the firmware using arduino-cli
 
 name: Build
