@@ -1,68 +1,16 @@
-# This is a basic workflow to check build of the firmware using arduino-cli
+name: Lint check
 
-name: Build
-
-# Controls when the workflow will run
 on:
   - push
   - pull_request
-  
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - name: Checkout
-        uses: actions/checkout@v2
 
-      # Runs a single command using the runners shell
-      - name: Update System and install sys necessities
-        run: |
-          sudo apt-get update -y
-          sudo apt-get install -y software-properties-common xvfb libxrender1 libxtst6 libxi6
-          sudo apt-get install -y libsdl2-2.0-0
-          wget -qO arduino-cli.tar.gz https://downloads.arduino.cc/arduino-cli/arduino-cli_latest_Linux_64bit.tar.gz
-          sudo tar xf arduino-cli.tar.gz
-          rm -rf arduino-cli.tar.gz
-          sudo chmod u+x ./arduino-cli
-          ./arduino-cli --help
-      
-      # 1. Create config file used by arduino-cli
-      # 2. Add our board donwload uri in there
-      # 3. Set a flag in that config file to download libs from git uris
-      # 4. Update the core-index(which downloads automatically and updates arduino-cli's dependencies)
-      # 5. Install our boards (i.e. uCs)
-      - name: arduino-cli install boards [build dependencies]
-        run: |
-          ./arduino-cli core update-index
-          ./arduino-cli config init
-          ./arduino-cli config add board_manager.additional_urls https://www.pjrc.com/teensy/td_156/package_teensy_index.json
-          ./arduino-cli config set library.enable_unsafe_install true
-          ./arduino-cli core update-index
-          ./arduino-cli config dump
-          ls -l
-          ./arduino-cli core install teensy:avr
-          ./arduino-cli core upgrade
-          ./arduino-cli core update-index
-      
-      # Install the li
-      - name: arduino-cli install libraries [build dependencies]
-        run: |
-          ./arduino-cli lib install --git-url https://github.com/designer2k2/EMUcanT4
-        
-      # Clean compile the code in build directory
-      # Gotcha: The main Arduino ino file is named differently than the repo name. 
-      # So we had to do some renaming as the compiler follows traditional arduino paradigm,
-      # where the main ino file should have the same prefix name as the src root directory. 
-      - name: Compile main firmware binary [clean build in /build/ dir]
-        run: |
-          rm -rf build
-          FQBN_ARG="-b teensy:avr:teensy41:usb=serial,speed=600,opt=o2std,keys=en-us"
-          DEBUG_TRUE="--build-property build.extra_flags=-DDEBUG=true"
-          DEBUG_FALSE="--build-property build.extra_flags=-DDEBUG=false"
-          sudo Xvfb :1 -screen 0 1024x768x24 </dev/null &
-          export DISPLAY=":1"
-          ./arduino-cli compile $FQBN_ARG $DEBUG_TRUE --quiet
-          ls -l
-          cd ..
+jobs:
+  compile-sketch:
+    runs-on: ubuntu-latest
+
+    steps:
+        - uses: actions/checkout@v3
+        - uses: arduino/arduino-lint-action@v1
+          with:
+            library-manager: update
+            compliance: strict
