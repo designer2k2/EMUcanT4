@@ -5,7 +5,7 @@ on:
   - pull_request
 
 jobs:
-  compile-sketch:
+  lint-check:
     runs-on: ubuntu-latest
 
     steps:
