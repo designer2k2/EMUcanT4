@@ -1,4 +1,15 @@
 # EMUcanT4
+
+🔥 **This Library is obsolete!** 🔥
+
+The EMUcan Library is now able to run also on a Teensy, no specific version is needed anymore. 🤩
+
+Please migrate to the EMUcan Library, there will be no future update/support here.
+
+**https://github.com/designer2k2/EMUcan**
+
+## old:
+
 ECUMaster EMU CAN Stream Reader Arduino Teensy 4 and 3 Library
 
 It reads the EMU CAN Stream and decodes it into something usefull.
